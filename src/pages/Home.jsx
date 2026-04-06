@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const profileImg = "/profile.jpg";
+
 const roles = [
   "Credit Card Collection Officer",
   "Expert in Negotiation",
@@ -14,11 +15,22 @@ const Home = () => {
   const [text, setText] = useState("");
   const [roleIndex, setRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isMobile, setIsMobile] = useState(false); // ✅ FIXED
 
-  const isMobile = window.innerWidth <= 768;
   const navigate = useNavigate();
 
-  // 🔥 PREMIUM TYPEWRITER
+  // ✅ MOBILE DETECTION FIX
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize(); // initial run
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // 🔥 TYPEWRITER
   useEffect(() => {
     const currentRole = roles[roleIndex];
     let speed = isDeleting ? 40 : 80;
@@ -52,7 +64,7 @@ const Home = () => {
         padding: isMobile ? "100px 20px 40px" : "100px 80px 50px",
       }}
     >
-      {/* 🔥 MOBILE IMAGE */}
+      {/* MOBILE IMAGE */}
       {isMobile && (
         <motion.div
           style={{
@@ -68,7 +80,7 @@ const Home = () => {
         </motion.div>
       )}
 
-      {/* LEFT CONTENT */}
+      {/* LEFT */}
       <div style={styles.left}>
         <motion.h1
           initial={{ opacity: 0, y: -40 }}
@@ -79,10 +91,7 @@ const Home = () => {
         </motion.h1>
 
         <motion.h2
-          style={{
-            ...styles.name,
-            fontSize: isMobile ? "32px" : "55px",
-          }}
+          style={{ ...styles.name, fontSize: isMobile ? "32px" : "55px" }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
@@ -90,29 +99,16 @@ const Home = () => {
         </motion.h2>
 
         {/* TYPEWRITER */}
-        <h3
-          style={{
-            ...styles.typing,
-            fontSize: isMobile ? "16px" : "22px",
-          }}
-        >
+        <h3 style={{ ...styles.typing, fontSize: isMobile ? "16px" : "22px" }}>
           {text}
           <span style={styles.cursor}>|</span>
         </h3>
 
         {/* DESCRIPTION */}
-        <p
-          style={{
-            ...styles.desc,
-            fontSize: isMobile ? "14px" : "15px",
-          }}
-        >
+        <p style={{ ...styles.desc, fontSize: isMobile ? "14px" : "15px" }}>
           Dedicated Credit Card Collection Officer with hands-on experience in
           managing customer interactions and overdue accounts. Skilled in
-          effective communication, negotiation, and follow-up strategies while
-          ensuring compliance with banking guidelines. Focused on achieving
-          recovery targets through professional and ethical collection
-          practices.
+          communication, negotiation, and follow-ups while ensuring compliance.
         </p>
 
         {/* BUTTONS */}
@@ -126,13 +122,14 @@ const Home = () => {
             Contact Me
           </button>
 
-          <a href="/resume.pdf" download>
+          {/* ✅ FIXED RESUME */}
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
             <button style={styles.btnOutline}>Download Resume</button>
           </a>
         </div>
       </div>
 
-      {/* 💻 DESKTOP IMAGE */}
+      {/* DESKTOP IMAGE */}
       {!isMobile && (
         <motion.div
           style={styles.imageWrapper}
@@ -164,7 +161,6 @@ const styles = {
 
   name: {
     fontWeight: "bold",
-    lineHeight: "1.2",
   },
 
   typing: {
