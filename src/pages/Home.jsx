@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import profileImg from "../public/profile.jpg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const profileImg = "/profile.jpg";
 const roles = [
   "Credit Card Collection Officer",
   "Expert in Negotiation",
