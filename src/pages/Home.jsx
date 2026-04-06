@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import profileImg from "../assets/profile.jpg";
+import profileImg from "../public/profile.jpg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
