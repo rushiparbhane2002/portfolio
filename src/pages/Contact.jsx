@@ -121,7 +121,7 @@ const Contact = () => {
             <FaLinkedin />
           </a>
 
-          <a href="mailto:rushikeshparbhane2002@gmail.com" style={styles.icon}>
+          <a href="mailto:rushiparbhane2002@gmail.com" style={styles.icon}>
             <FaEnvelope />
           </a>
 
