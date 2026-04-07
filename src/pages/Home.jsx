@@ -1,10 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-//
-// ✅ IMPORTANT: make sure file name is EXACTLY same in /public
-// example: public/profile.jpg
-const profileImg = "/profile.jpg";
+import profileImg from "../assets/profile1.jpg"; // ✅ FINAL FIX
 
 const roles = [
   "Credit Card Collection Officer",
@@ -21,7 +18,6 @@ const Home = () => {
 
   const navigate = useNavigate();
 
-  // ✅ MOBILE DETECTION
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -32,7 +28,6 @@ const Home = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // ✅ TYPEWRITER
   useEffect(() => {
     const currentRole = roles[roleIndex];
     let speed = isDeleting ? 40 : 80;
@@ -63,17 +58,17 @@ const Home = () => {
         ...styles.container,
         flexDirection: isMobile ? "column" : "row",
         textAlign: isMobile ? "center" : "left",
-        padding: isMobile ? "10px 20px 30px" : "100px 80px",
+        padding: isMobile ? "0px 20px 30px" : "100px 80px",
       }}
     >
-      {/* ✅ MOBILE IMAGE */}
+      {/* MOBILE IMAGE */}
       {isMobile && (
         <motion.div
           style={{
             ...styles.imageWrapper,
             width: "200px",
             height: "200px",
-            marginBottom: "10px", // ✅ FIXED GAP
+            marginBottom: "10px",
           }}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -103,7 +98,6 @@ const Home = () => {
           Rushikesh <span style={{ color: "#00e0c6" }}>Parbhane</span>
         </motion.h2>
 
-        {/* TYPEWRITER */}
         <h3
           style={{
             ...styles.typing,
@@ -114,7 +108,6 @@ const Home = () => {
           <span style={styles.cursor}>|</span>
         </h3>
 
-        {/* DESCRIPTION */}
         <p
           style={{
             ...styles.desc,
@@ -126,7 +119,6 @@ const Home = () => {
           communication, negotiation, and follow-ups while ensuring compliance.
         </p>
 
-        {/* BUTTONS */}
         <div
           style={{
             ...styles.buttons,
@@ -143,7 +135,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* ✅ DESKTOP IMAGE */}
+      {/* DESKTOP IMAGE */}
       {!isMobile && (
         <motion.div
           style={styles.imageWrapper}
@@ -161,9 +153,10 @@ const styles = {
   container: {
     minHeight: "100vh",
     display: "flex",
-    justifyContent: "center", // ✅ FIX SPACE
+    justifyContent: "center",
     alignItems: "center",
-    gap: "40px", // ✅ CONTROL GAP
+    gap: "40px",
+    paddingTop: "70px", // ✅ FIX NAVBAR SPACE
     color: "white",
     background: "linear-gradient(135deg, #020617, #0f172a)",
     flexWrap: "wrap",

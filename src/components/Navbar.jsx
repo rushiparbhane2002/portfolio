@@ -18,7 +18,7 @@ const Navbar = () => {
     <nav style={styles.nav}>
       {/* LEFT */}
       <div style={styles.left}>
-        <img src="/profile.jpg" alt="profile" style={styles.profile} />
+        <img src="/profile1.jpg" alt="profile" style={styles.profile} />
         <h2 style={styles.logo}>Rushikesh</h2>
       </div>
 
