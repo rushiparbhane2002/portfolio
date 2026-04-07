@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+// ✅ IMPORTANT: make sure file name is EXACTLY same in /public
+// example: public/profile.jpg
 const profileImg = "/profile.jpg";
 
 const roles = [
@@ -15,22 +17,22 @@ const Home = () => {
   const [text, setText] = useState("");
   const [roleIndex, setRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [isMobile, setIsMobile] = useState(false); // ✅ FIXED
+  const [isMobile, setIsMobile] = useState(false);
 
   const navigate = useNavigate();
 
-  // ✅ MOBILE DETECTION FIX
+  // ✅ MOBILE DETECTION
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
-    handleResize(); // initial run
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // 🔥 TYPEWRITER
+  // ✅ TYPEWRITER
   useEffect(() => {
     const currentRole = roles[roleIndex];
     let speed = isDeleting ? 40 : 80;
@@ -61,17 +63,17 @@ const Home = () => {
         ...styles.container,
         flexDirection: isMobile ? "column" : "row",
         textAlign: isMobile ? "center" : "left",
-        padding: isMobile ? "100px 20px 40px" : "100px 80px 50px",
+        padding: isMobile ? "90px 20px 30px" : "100px 80px",
       }}
     >
-      {/* MOBILE IMAGE */}
+      {/* ✅ MOBILE IMAGE */}
       {isMobile && (
         <motion.div
           style={{
             ...styles.imageWrapper,
-            width: "180px",
-            height: "180px",
-            marginBottom: "20px",
+            width: "200px",
+            height: "200px",
+            marginBottom: "10px", // ✅ FIXED GAP
           }}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -80,7 +82,7 @@ const Home = () => {
         </motion.div>
       )}
 
-      {/* LEFT */}
+      {/* LEFT CONTENT */}
       <div style={styles.left}>
         <motion.h1
           initial={{ opacity: 0, y: -40 }}
@@ -91,7 +93,10 @@ const Home = () => {
         </motion.h1>
 
         <motion.h2
-          style={{ ...styles.name, fontSize: isMobile ? "32px" : "55px" }}
+          style={{
+            ...styles.name,
+            fontSize: isMobile ? "30px" : "55px",
+          }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
@@ -99,13 +104,23 @@ const Home = () => {
         </motion.h2>
 
         {/* TYPEWRITER */}
-        <h3 style={{ ...styles.typing, fontSize: isMobile ? "16px" : "22px" }}>
+        <h3
+          style={{
+            ...styles.typing,
+            fontSize: isMobile ? "16px" : "22px",
+          }}
+        >
           {text}
           <span style={styles.cursor}>|</span>
         </h3>
 
         {/* DESCRIPTION */}
-        <p style={{ ...styles.desc, fontSize: isMobile ? "14px" : "15px" }}>
+        <p
+          style={{
+            ...styles.desc,
+            fontSize: isMobile ? "14px" : "15px",
+          }}
+        >
           Dedicated Credit Card Collection Officer with hands-on experience in
           managing customer interactions and overdue accounts. Skilled in
           communication, negotiation, and follow-ups while ensuring compliance.
@@ -122,14 +137,13 @@ const Home = () => {
             Contact Me
           </button>
 
-          {/* ✅ FIXED RESUME */}
           <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
             <button style={styles.btnOutline}>Download Resume</button>
           </a>
         </div>
       </div>
 
-      {/* DESKTOP IMAGE */}
+      {/* ✅ DESKTOP IMAGE */}
       {!isMobile && (
         <motion.div
           style={styles.imageWrapper}
@@ -147,8 +161,9 @@ const styles = {
   container: {
     minHeight: "100vh",
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "center", // ✅ FIX SPACE
     alignItems: "center",
+    gap: "40px", // ✅ CONTROL GAP
     color: "white",
     background: "linear-gradient(135deg, #020617, #0f172a)",
     flexWrap: "wrap",
@@ -170,7 +185,6 @@ const styles = {
 
   cursor: {
     marginLeft: "5px",
-    animation: "blink 1s infinite",
   },
 
   desc: {
@@ -205,15 +219,16 @@ const styles = {
   },
 
   imageWrapper: {
-    width: "300px",
-    height: "300px",
+    width: "260px",
+    height: "260px",
     borderRadius: "50%",
     border: "3px solid #00e0c6",
     padding: "5px",
-    boxShadow: "0 0 40px rgba(0,224,198,0.3)",
+    boxShadow: "0 0 30px rgba(0,224,198,0.3)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    margin: "0 auto",
   },
 
   image: {
