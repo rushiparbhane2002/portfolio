@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+//
 // ✅ IMPORTANT: make sure file name is EXACTLY same in /public
 // example: public/profile.jpg
 const profileImg = "/profile.jpg";
@@ -63,7 +63,7 @@ const Home = () => {
         ...styles.container,
         flexDirection: isMobile ? "column" : "row",
         textAlign: isMobile ? "center" : "left",
-        padding: isMobile ? "90px 20px 30px" : "100px 80px",
+        padding: isMobile ? "10px 20px 30px" : "100px 80px",
       }}
     >
       {/* ✅ MOBILE IMAGE */}
