@@ -6,7 +6,7 @@ import profileImg from "../assets/profile1.jpg"; // ✅ FINAL FIX
 const roles = [
   "Credit Card Collection Officer",
   "Expert in Negotiation",
-  "EMI & Settlement Specialist",
+  "Debt Management Specialist",
   "Recovery Strategy Planner",
 ];
 
